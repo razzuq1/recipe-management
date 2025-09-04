@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #1e3c72;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #1e3c72;
+        }
+
+        .filter-group input, .filter-group select {
+            padding: 10px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-group input:focus, .filter-group select:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .table-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 15px 12px;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        th {
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        tr {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        tr:hover {
+            background: rgba(42, 82, 152, 0.05);
+            transform: scale(1.005);
+        }
+
+        .title-cell {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .stars {
+            color: #ffa726;
+            font-size: 18px;
+        }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: -500px;
+            width: 500px;
+            height: 100vh;
+            background: white;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+            transition: right 0.4s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .drawer.open {
+            right: 0;
+        }
+
+        .drawer-header {
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+        }
+
+        .drawer-content {
+            padding: 25px;
+        }
+
+        .drawer-section {
+            margin-bottom: 25px;
+        }
+
+        .drawer-section h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #1e3c72;
+            min-width: 120px;
+        }
+
+        .nutrition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .nutrition-table th,
+        .nutrition-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .nutrition-table th {
+            background: #f8f9fa;
+            color: #1e3c72;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            color: #2a5298;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .expanded-time {
+            margin-top: 10px;
+            padding: 15px;
+            background: #f0f4f8;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .expanded-time.show {
+            display: block;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #1e3c72;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .drawer {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .controls {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 10px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Recipe Management System</h1>
+            <p>Discover and explore amazing recipes from around the world</p>
+        </div>
+
+        <div class="controls">
+            <div class="filter-group">
+                <label for="a">Title</label>
+                <input type="text" id="a" placeholder="Search by title...">
+            </div>
+            <div class="filter-group">
+                <label for="b">Cuisine</label>
+                <input type="text" id="b" placeholder="Filter by cuisine...">
+            </div>
+            <div class="filter-group">
+                <label for="c">Rating</label>
+                <select id="c">
+                    <option value="">All Ratings</option>
+                    <option value=">=4.5">4.5+ Stars</option>
+                    <option value=">=4.0">4.0+ Stars</option>
+                    <option value=">=3.5">3.5+ Stars</option>
+                    <option value="<=3.0">3.0 or less</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="d">Total Time</label>
+                <select id="d">
+                    <option value="">Any Time</option>
+                    <option value="<=30">30 minutes or less</option>
+                    <option value="<=60">1 hour or less</option>
+                    <option value="<=120">2 hours or less</option>
+                    <option value=">120">More than 2 hours</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="e">Calories</label>
+                <select id="e">
+                    <option value="">Any Calories</option>
+                    <option value="<=300">300 or less</option>
+                    <option value="<=400">400 or less</option>
+                    <option value="<=500">500 or less</option>
+                    <option value=">500">More than 500</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="f">Results per page</label>
+                <select id="f">
+                    <option value="15">15 per page</option>
+                    <option value="25">25 per page</option>
+                    <option value="35">35 per page</option>
+                    <option value="50">50 per page</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <div class="pagination-controls">
+                <button id="g" class="btn">Previous</button>
+                <span id="h">Page 1 of 1</span>
+                <button id="i" class="btn">Next</button>
+            </div>
+            
+            <table id="j">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Cuisine</th>
+                        <th>Rating</th>
+                        <th>Total Time</th>
+                        <th>Serves</th>
+                    </tr>
+                </thead>
+                <tbody id="k">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="l" class="drawer">
+        <div class="drawer-header">
+            <button class="close-btn" onclick="m()">&times;</button>
+            <h2 id="n"></h2>
+            <p id="o"></p>
+        </div>
+        <div class="drawer-content">
+            <div class="drawer-section">
+                <div class="info-row">
+                    <span class="info-label">Description:</span>
+                    <span id="p"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Total Time:</span>
+                    <span id="q"></span>
+                    <button class="expand-btn" onclick="r()">▼</button>
+                </div>
+                <div id="s" class="expanded-time">
+                    <div class="info-row">
+                        <span class="info-label">Cook Time:</span>
+                        <span id="t"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Prep Time:</span>
+                        <span id="u"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="drawer-section">
+                <h3>Nutritional Information</h3>
+                <table class="nutrition-table" id="v">
+                    <thead>
+                        <tr>
+                            <th>Nutrient</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let w = 1;
+        let x = 15;
+        let y = 1;
+        let z = false;
+
+        const api = 'http://127.0.0.1:3001/api';
+
+        function aa(rating) {
+            if (!rating) return '☆☆☆☆☆';
+            const stars = Math.round(rating);
+            return '★'.repeat(stars) + '☆'.repeat(5 - stars);
+        }
+
+        function bb(time) {
+            if (!time) return 'Not specified';
+            if (time < 60) return `${time} min`;
+            const hours = Math.floor(time / 60);
+            const minutes = time % 60;
+            return minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
+        }
+
+        function cc(text, maxLength = 50) {
+            if (!text) return '';
+            return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+        }
+
+        async function dd() {
+            try {
+                document.getElementById('k').innerHTML = '<tr><td colspan="5" class="loading">Loading recipes...</td></tr>';
+                
+                let url = `${api}/recipes`;
+                
+                if (z) {
+                    url = `${api}/recipes/search`;
+                    const params = new URLSearchParams();
+                    
+                    const title = document.getElementById('a').value;
+                    const cuisine = document.getElementById('b').value;
+                    const rating = document.getElementById('c').value;
+                    const totalTime = document.getElementById('d').value;
+                    const calories = document.getElementById('e').value;
+                    
+                    if (title) params.append('title', title);
+                    if (cuisine) params.append('cuisine', cuisine);
+                    if (rating) params.append('rating', rating);
+                    if (totalTime) params.append('total_time', totalTime);
+                    if (calories) params.append('calories', calories);
+                    
+                    if (params.toString()) {
+                        url += '?' + params.toString();
+                    }
+                } else {
+                    url += `?page=${w}&limit=${x}`;
+                }
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                const tbody = document.getElementById('k');
+                tbody.innerHTML = '';
+                
+                if (!data.data || data.data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" class="no-results"><div><h3>No recipes found</h3><p>Try adjusting your search criteria</p></div></td></tr>';
+                    return;
+                }
+                
+                data.data.forEach(recipe => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="title-cell" title="${recipe.title}">${cc(recipe.title)}</td>
+                        <td>${recipe.cuisine || 'N/A'}</td>
+                        <td class="stars">${aa(recipe.rating)}</td>
+                        <td>${bb(recipe.total_time)}</td>
+                        <td>${recipe.serves || 'N/A'}</td>
+                    `;
+                    row.onclick = () => ee(recipe);
+                    tbody.appendChild(row);
+                });
+                
+                if (!z && data.total) {
+                    y = Math.ceil(data.total / x);
+                    ff();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('k').innerHTML = '<tr><td colspan="5" class="no-results"><div><h3>Error loading recipes</h3><p>Please try again later</p></div></td></tr>';
+            }
+        }
+
+        function ff() {
+            document.getElementById('h').textContent = `Page ${w} of ${y}`;
+            document.getElementById('g').disabled = w <= 1;
+            document.getElementById('i').disabled = w >= y;
+        }
+
+        function ee(recipe) {
+            document.getElementById('n').textContent = recipe.title || 'Recipe Details';
+            document.getElementById('o').textContent = recipe.cuisine || '';
+            document.getElementById('p').textContent = recipe.description || 'No description available';
+            document.getElementById('q').textContent = bb(recipe.total_time);
+            document.getElementById('t').textContent = bb(recipe.cook_time);
+            document.getElementById('u').textContent = bb(recipe.prep_time);
+            
+            const nutritionTableBody = document.querySelector('#v tbody');
+            nutritionTableBody.innerHTML = '';
+            
+            if (recipe.nutrients) {
+                const nutrients = typeof recipe.nutrients === 'string' ? JSON.parse(recipe.nutrients) : recipe.nutrients;
+                Object.entries(nutrients).forEach(([key, value]) => {
+                    if (value !== null && value !== undefined) {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${key.replace(/([A-Z])/g, ' $1').toLowerCase()}</td>
+                            <td>${value}</td>
+                        `;
+                        nutritionTableBody.appendChild(row);
+                    }
+                });
+            }
+            
+            document.getElementById('l').classList.add('open');
+        }
+
+        function m() {
+            document.getElementById('l').classList.remove('open');
+        }
+
+        function r() {
+            const expandedSection = document.getElementById('s');
+            const isVisible = expandedSection.classList.contains('show');
+            expandedSection.classList.toggle('show');
+            
+            const button = event.target;
+            button.textContent = isVisible ? '▼' : '▲';
+        }
+
+        function gg() {
+            const title = document.getElementById('a').value.trim();
+            const cuisine = document.getElementById('b').value.trim();
+            const rating = document.getElementById('c').value.trim();
+            const totalTime = document.getElementById('d').value.trim();
+            const calories = document.getElementById('e').value.trim();
+            
+            z = !!(title || cuisine || rating || totalTime || calories);
+            w = 1;
+            
+            console.log('🔍 Filter applied:', { title, cuisine, rating, totalTime, calories, hasFilters: z });
+            
+            // Add small delay to prevent rapid API calls
+            clearTimeout(window.searchTimeout);
+            window.searchTimeout = setTimeout(() => {
+                dd();
+            }, 300);
+        }
+
+        document.getElementById('g').onclick = () => {
+            if (w > 1) {
+                w--;
+                dd();
+            }
+        };
+
+        document.getElementById('i').onclick = () => {
+            if (w < y) {
+                w++;
+                dd();
+            }
+        };
+
+        document.getElementById('f').onchange = (e) => {
+            x = parseInt(e.target.value);
+            w = 1;
+            dd();
+        };
+
+        ['a', 'b', 'c', 'd', 'e'].forEach(id => {
+            document.getElementById(id).addEventListener('input', gg);
+            document.getElementById(id).addEventListener('change', gg);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                m();
+            }
+        });
+
+        dd();
+    </script>
+</body>
+</html>

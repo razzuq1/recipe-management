@@ -1,0 +1,235 @@
+[
+  {
+    "Contient": "North America",
+    "Country_State": "US",
+    "cuisine": "Southern Recipes",
+    "title": "Sweet Potato Pie",
+    "URL": "https://www.allrecipes.com/recipe/12142/sweet-potato-pie-i/",
+    "rating": 4.8,
+    "total_time": 115,
+    "prep_time": 15,
+    "cook_time": 100,
+    "description": "Shared from a Southern recipe, this homemade sweet potato pie is easy to make with boiled sweet potato. Try it, it may just be the best you've ever tasted!",
+    "ingredients": [
+      "1 (1 pound) sweet potato, with skin",
+      "0.5 cup butter, softened",
+      "1 cup white sugar",
+      "0.5 cup milk",
+      "2 large eggs",
+      "0.5 teaspoon ground nutmeg",
+      "0.5 teaspoon ground cinnamon",
+      "1 teaspoon vanilla extract",
+      "1 (9 inch) unbaked pie crust"
+    ],
+    "instructions": [
+      "Place whole sweet potato in pot and cover with water; bring to a boil. Boil until tender when pierced with a fork, 40 to 50 minutes.",
+      "Preheat the oven to 350 degrees F (175 degrees C).",
+      "Remove sweet potato from the pot and run under cold water. Remove and discard skin.",
+      "Break sweet potato flesh apart and place in a bowl. Add butter and mix with an electric mixer until well combined. Add sugar, milk, eggs, nutmeg, cinnamon, and vanilla; beat on medium speed until mixture is smooth. Pour filling into unbaked pie crust.",
+      "Bake in the preheated oven until a knife inserted in the center comes out clean, 55 to 60 minutes.",
+      "Remove from the oven and let cool before serving."
+    ],
+    "nutrients": {
+      "calories": "389 kcal",
+      "carbohydrateContent": "48 g",
+      "cholesterolContent": "78 mg",
+      "fiberContent": "3 g",
+      "proteinContent": "5 g",
+      "saturatedFatContent": "10 g",
+      "sodiumContent": "254 mg",
+      "sugarContent": "28 g",
+      "fatContent": "21 g",
+      "unsaturatedFatContent": "0 g"
+    },
+    "serves": "8 servings"
+  },
+  {
+    "cuisine": "Italian",
+    "title": "Classic Spaghetti Carbonara",
+    "rating": 4.9,
+    "total_time": 30,
+    "prep_time": 10,
+    "cook_time": 20,
+    "description": "Authentic Italian carbonara with eggs, cheese, pancetta, and black pepper. Simple yet incredibly flavorful.",
+    "nutrients": {
+      "calories": "520 kcal",
+      "carbohydrateContent": "45 g",
+      "cholesterolContent": "185 mg",
+      "fiberContent": "2 g",
+      "proteinContent": "22 g",
+      "saturatedFatContent": "12 g",
+      "sodiumContent": "890 mg",
+      "sugarContent": "2 g",
+      "fatContent": "28 g"
+    },
+    "serves": "4 servings"
+  },
+  {
+    "cuisine": "Mexican",
+    "title": "Spicy Chicken Tacos",
+    "rating": 4.6,
+    "total_time": 45,
+    "prep_time": 20,
+    "cook_time": 25,
+    "description": "Juicy spiced chicken in soft tortillas with fresh salsa and avocado. Perfect for a quick dinner.",
+    "nutrients": {
+      "calories": "320 kcal",
+      "carbohydrateContent": "28 g",
+      "cholesterolContent": "65 mg",
+      "fiberContent": "4 g",
+      "proteinContent": "25 g",
+      "saturatedFatContent": "6 g",
+      "sodiumContent": "680 mg",
+      "sugarContent": "3 g",
+      "fatContent": "15 g"
+    },
+    "serves": "6 servings"
+  },
+  {
+    "cuisine": "Asian",
+    "title": "Beef Stir Fry",
+    "rating": 4.7,
+    "total_time": 25,
+    "prep_time": 15,
+    "cook_time": 10,
+    "description": "Quick and healthy beef stir fry with mixed vegetables in a savory sauce.",
+    "nutrients": {
+      "calories": "280 kcal",
+      "carbohydrateContent": "15 g",
+      "cholesterolContent": "55 mg",
+      "fiberContent": "3 g",
+      "proteinContent": "28 g",
+      "saturatedFatContent": "4 g",
+      "sodiumContent": "920 mg",
+      "sugarContent": "8 g",
+      "fatContent": "12 g"
+    },
+    "serves": "4 servings"
+  },
+  {
+    "cuisine": "French",
+    "title": "Chocolate Soufflé",
+    "rating": 4.5,
+    "total_time": 75,
+    "prep_time": 30,
+    "cook_time": 45,
+    "description": "Light and airy French chocolate soufflé that melts in your mouth. An elegant dessert for special occasions.",
+    "nutrients": {
+      "calories": "450 kcal",
+      "carbohydrateContent": "35 g",
+      "cholesterolContent": "195 mg",
+      "fiberContent": "2 g",
+      "proteinContent": "8 g",
+      "saturatedFatContent": "18 g",
+      "sodiumContent": "120 mg",
+      "sugarContent": "32 g",
+      "fatContent": "28 g"
+    },
+    "serves": "6 servings"
+  },
+  {
+    "cuisine": "Mediterranean",
+    "title": "Greek Salad",
+    "rating": 4.4,
+    "total_time": 15,
+    "prep_time": 15,
+    "cook_time": "NaN",
+    "description": "Fresh and healthy Greek salad with tomatoes, cucumbers, olives, and feta cheese.",
+    "nutrients": {
+      "calories": "180 kcal",
+      "carbohydrateContent": "12 g",
+      "cholesterolContent": "25 mg",
+      "fiberContent": "4 g",
+      "proteinContent": "6 g",
+      "saturatedFatContent": "5 g",
+      "sodiumContent": "520 mg",
+      "sugarContent": "8 g",
+      "fatContent": "14 g"
+    },
+    "serves": "4 servings"
+  },
+  {
+    "cuisine": "Indian",
+    "title": "Butter Chicken",
+    "rating": 4.8,
+    "total_time": 90,
+    "prep_time": 30,
+    "cook_time": 60,
+    "description": "Creamy and rich Indian butter chicken with aromatic spices and tender chicken pieces.",
+    "nutrients": {
+      "calories": "420 kcal",
+      "carbohydrateContent": "18 g",
+      "cholesterolContent": "85 mg",
+      "fiberContent": "2 g",
+      "proteinContent": "32 g",
+      "saturatedFatContent": "15 g",
+      "sodiumContent": "780 mg",
+      "sugarContent": "12 g",
+      "fatContent": "25 g"
+    },
+    "serves": "5 servings"
+  },
+  {
+    "cuisine": "American",
+    "title": "BBQ Pulled Pork",
+    "rating": 4.6,
+    "total_time": 480,
+    "prep_time": 20,
+    "cook_time": 460,
+    "description": "Slow-cooked pulled pork with smoky BBQ sauce. Perfect for sandwiches and gatherings.",
+    "nutrients": {
+      "calories": "380 kcal",
+      "carbohydrateContent": "25 g",
+      "cholesterolContent": "75 mg",
+      "fiberContent": "1 g",
+      "proteinContent": "30 g",
+      "saturatedFatContent": "8 g",
+      "sodiumContent": "1200 mg",
+      "sugarContent": "20 g",
+      "fatContent": "18 g"
+    },
+    "serves": "8 servings"
+  },
+  {
+    "cuisine": "Japanese",
+    "title": "Chicken Teriyaki",
+    "rating": 4.7,
+    "total_time": 35,
+    "prep_time": 10,
+    "cook_time": 25,
+    "description": "Glazed chicken with sweet teriyaki sauce, served with steamed rice and vegetables.",
+    "nutrients": {
+      "calories": "340 kcal",
+      "carbohydrateContent": "22 g",
+      "cholesterolContent": "70 mg",
+      "fiberContent": "1 g",
+      "proteinContent": "28 g",
+      "saturatedFatContent": "3 g",
+      "sodiumContent": "890 mg",
+      "sugarContent": "18 g",
+      "fatContent": "12 g"
+    },
+    "serves": "4 servings"
+  },
+  {
+    "cuisine": "Thai",
+    "title": "Pad Thai",
+    "rating": 4.5,
+    "total_time": 40,
+    "prep_time": 20,
+    "cook_time": 20,
+    "description": "Classic Thai stir-fried noodles with shrimp, tofu, bean sprouts, and peanuts in tangy sauce.",
+    "nutrients": {
+      "calories": "410 kcal",
+      "carbohydrateContent": "55 g",
+      "cholesterolContent": "95 mg",
+      "fiberContent": "3 g",
+      "proteinContent": "18 g",
+      "saturatedFatContent": "4 g",
+      "sodiumContent": "950 mg",
+      "sugarContent": "15 g",
+      "fatContent": "16 g"
+    },
+    "serves": "4 servings"
+  }
+]
